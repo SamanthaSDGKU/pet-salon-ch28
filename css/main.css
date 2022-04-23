@@ -26,8 +26,19 @@ header.site-header{
     border:1px solid black;
     border-radius: 5px;
     background-color: #dedede;
-    
+    padding:1rem;
 }
 .pet label{
     display: block;
+}
+.pet .pet-header{
+    display: flex;
+    justify-content: space-between;
+}
+.pet .pet-header button{
+    font-size: 14px;
+    border:none;
+}
+.highlight{
+    border:3px solid red;
 }

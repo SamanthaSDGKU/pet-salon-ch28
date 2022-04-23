@@ -11,7 +11,8 @@ let petSalon = {
     },
     pets:[]
 }
-//name,age,gender,breed,service,owner name, contact phone
+let c=0;//this is a counter var
+//name,age,gender,breed,service,owner name, contact phones
 function Pet(name,age,gender,breed,service,ownerName,contactPhone){
     this.name=name;
     this.age=age;
@@ -20,7 +21,9 @@ function Pet(name,age,gender,breed,service,ownerName,contactPhone){
     this.service=service;
     this.owner=ownerName;
     this.phone=contactPhone;
+    this.id=c++;// increase the var 1 everytime that is used
 }
+
 //get the info from the inputs and store the information
 let inputName=document.getElementById("txtName");
 let inputAge=document.getElementById("txtAge");
@@ -60,16 +63,58 @@ function register(){
         //clear the inputs
         clearInputs();
     }
-    
-    
 }
 
 function clearInputs(){
     inputName.value="";
     inputAge.value="";
 }
+
+function deletePet(petId){
+    console.log("Deleting" + petId);
+    let deleteIndex;
+    // in this function ---------
+        // travel the array (for loop)
+    for(let i=0;i<petSalon.pets.length;i++){
+        let pet = petSalon.pets[i];
+        if(petId==pet.id){
+           // find the id (if)
+            // get the position in the array (store in a var) 
+            deleteIndex=i;
+            console.log("I found it in position:" + i);
+        } 
+    }
+    // remove from the array (splice())
+    petSalon.pets.splice(deleteIndex,1);    
+    // remove from the html (remove())
+    document.getElementById(petId).remove();
+    // display to the user a message
+    //
+}
+
+function searchPet(){
+    //previous actions
+        // add an inputSearch on the html
+        // add a search button on the html
+        // get the string
+        let searchString = document.getElementById("txtSearch").value;
+        console.log("Searching " + searchString);
+    // in this function ---------
+    for(let i=0;i<petSalon.pets.length;i++){
+        let pet = petSalon.pets[i];
+        // travel the array (for loop)
+        // find the id (if)
+        if(searchString.toLowerCase() === pet.name.toLowerCase()){
+            // highlight the result
+            document.getElementById(pet.id).classList.add("highlight");
+        }else{
+            document.getElementById(pet.id).classList.remove("highlight");
+        }  
+    }
+}
+
 //Create three pets
 let scooby = new Pet("Scooby",50,"Male","Dane","Grooming","Shaggy","555-555-555");
 let scrappy = new Pet("Scrappy",40,"Male","Mixed","Nails cut"," Shaggy","555-555-555");
 petSalon.pets.push(scooby,scrappy);
-displayCards()
+displayCards();
